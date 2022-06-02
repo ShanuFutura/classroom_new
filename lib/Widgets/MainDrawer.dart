@@ -6,7 +6,8 @@ import 'package:school_management/Screens/Exam/timetable.dart';
 import 'package:school_management/Screens/Leave_Apply/Leave_apply.dart';
 import 'package:school_management/Screens/LoginPage.dart';
 import 'package:school_management/Screens/home.dart';
-import 'package:school_management/Screens/meetings.dart';
+import 'package:school_management/Screens/materials.dart';
+import 'package:school_management/Widgets/meetings.dart';
 import 'package:school_management/Widgets/DrawerListTile.dart';
 import 'package:school_management/Widgets/Exams/internal.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -103,6 +104,17 @@ class _MainDrawerState extends State<MainDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) => ExamResult(),
+                ),
+              );
+            }),
+            DrawerListTile(
+            imgpath: "book.png",
+            name: "Study Materials",
+            ontap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => Materials(),
                 ),
               );
             }),
