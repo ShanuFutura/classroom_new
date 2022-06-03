@@ -8,8 +8,8 @@ import 'package:photo_view/photo_view.dart';
 // import 'package:provider/provider.dart';
 
 class ImageViewScreen extends StatelessWidget {
-  ImageViewScreen(Image this.img);
-  Image img;
+  ImageViewScreen(String this.img);
+  String img;
   // final imageLoc;
   // ImageViewScreen(this.imageLoc);
   // const ImageViewScreen({ Key? key }) : super(key: key);

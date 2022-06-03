@@ -47,7 +47,8 @@ class Meetings extends StatelessWidget {
                           launchUrl(Uri.parse(
                               '${(snap.data as dynamic)[index]['link']}'));
                         },
-                        leading: Image.asset('assets/meet.png'),
+                        leading: Image.network(
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/YouTube_social_white_squircle.svg/1200px-YouTube_social_white_squircle.svg.png'),
                         title: Text((snap.data as dynamic)[index]['heading']),
                         subtitle: Text(
                           (snap.data as dynamic)[index]['link'],

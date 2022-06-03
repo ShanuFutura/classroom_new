@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.school_management_system">
    <application
+   android:usesCleartextTraffic="true"
         android:label="school_management_system"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

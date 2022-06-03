@@ -46,7 +46,9 @@ dependencies:
   select_form_field: ^2.2.0
   url_launcher: ^6.1.2
   photo_view: ^0.14.0
-  # flutter_pdfview: ^1.2.2
+  webview_flutter: ^3.0.4
+  pdf: ^3.8.1
+  # flutter_pdfview: ^1.2.1
   # flutter_downloader: ^1.8.0+1
 dev_dependencies:
   flutter_test:

@@ -13,17 +13,28 @@ class Internal extends StatelessWidget {
   getData() async {
     final spref = await SharedPreferences.getInstance();
     print(spref.getString('reg_no').toString());
-    var url =Constants.x+ "avg.php";
+    var url = Constants.x + "avg.php";
 
     http.Response response = await http.post(Uri.parse(url), body: {
       'reg_no': spref.getString('reg_no'),
     });
+    final totalMark = jsonDecode(response.body)['total_internal'];
+    // print('temp res=$tempRes');
+    print('totalmark $totalMark');
+    http.post(Uri.parse(Constants.x + 'view_internal.php'), body: {
+      'reg_no': spref.getString('reg_no'),
+      'mark': totalMark.toString(),
+    }).then((value) => print('sent back${value.body}'));
     print(response.body);
     if (response.statusCode == 200) {
       data = jsonDecode(response.body);
       // print('respons  $data');
     }
     return jsonDecode(response.body);
+  }
+
+  sendBackTotalInternal(String reg, String mark) {
+    print('reg:$reg mark$mark');
   }
 
   @override

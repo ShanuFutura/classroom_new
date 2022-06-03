@@ -1,4 +1,5 @@
 import 'dart:convert';
+// import 'dart:html' as htm;
 
 import 'package:flutter/material.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
@@ -8,8 +9,11 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:school_management/Screens/Exam/constant.dart';
+import 'package:school_management/Screens/image_view.dart';
+import 'package:school_management/Screens/pdf_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:pet_spotter/utils/constant.dart';
 
 class Materials extends StatelessWidget {
@@ -48,6 +52,8 @@ class Materials extends StatelessWidget {
                     return Card(
                       child: ListTile(
                         onTap: () {
+                          // launchUrl(Uri.parse(
+                          //     '${(snap.data as dynamic)[index]['file_path']}'));
                           // FlutterDownloader.enqueue(
                           //     url: (snap.data as dynamic)[index]['file_path'],
                           //     savedDir: '/storage/emulated/0/Download/');
@@ -55,10 +61,30 @@ class Materials extends StatelessWidget {
                           //   filePath: (snap.data as dynamic)[index]
                           //       ['file_path'],
                           // );
+                          // ht.window.open(
+                          //     (snap.data as dynamic)[index]['file_path'],
+                          //     'name');
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (conext) {
+                            return ImageViewScreen(
+                                (snap.data as dynamic)[index]['file_path']);
+                          }));
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (conext) {
+                          //   return PDFViewPage(
+                          //       path: (snap.data as dynamic)[index]
+                          //           ['file_path']);
+                          // }));
+                          // html.window.open(
+                          //     '${(snap.data as dynamic)[index]['file_path']}',
+                          //     'name');
+                          print(
+                              'file path :- ${(snap.data as dynamic)[index]['file_path']}');
                           // launchUrl(Uri.parse(
-                          //     '${(snap.data as dynamic)[index]['file_path']}'));
+                          //     'https://docs.google.com/gview?embedded=true&url=${(snap.data as dynamic)[index]['file_path']}'));
                         },
-                        leading: Image.asset('assets/meet.png'),
+                        leading: Icon(Icons.description),
                         title: Text((snap.data as dynamic)[index]['heading']),
                         subtitle: Text(
                           (snap.data as dynamic)[index]['file'],
