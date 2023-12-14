@@ -1,55 +1,53 @@
+// ignore_for_file: avoid_print, file_names, library_private_types_in_public_api, non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:randomizer/randomizer.dart';
 import 'package:school_management/Screens/Exam/constant.dart';
 import 'package:school_management/Screens/Exam/upload.dart';
 
 import 'package:school_management/Widgets/AppBar.dart';
-import 'package:school_management/Widgets/BouncingButton.dart';
 import 'package:school_management/Widgets/Exams/SubjectCard.dart';
 import 'package:school_management/Widgets/MainDrawer.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ExamResult extends StatefulWidget {
+  const ExamResult({super.key});
+
   @override
   _ExamResultState createState() => _ExamResultState();
 }
 
 class _ExamResultState extends State<ExamResult>
     with SingleTickerProviderStateMixin {
-  Animation animation, delayedAnimation, muchDelayedAnimation, LeftCurve;
-  AnimationController animationController;
-  Randomizer randomcolor = Randomizer();
+  late Animation animation, delayedAnimation, muchDelayedAnimation, LeftCurve;
+  late AnimationController animationController;
+  // Randomizer randomcolor = Randomizer();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
     //SystemChrome.setEnabledSystemUIOverlays([]);
 
     animationController =
-        AnimationController(duration: Duration(seconds: 3), vsync: this);
+        AnimationController(duration: const Duration(seconds: 3), vsync: this);
     animation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn));
 
     delayedAnimation = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController,
-        curve: Interval(0.2, 0.5, curve: Curves.fastOutSlowIn)));
+        curve: const Interval(0.2, 0.5, curve: Curves.fastOutSlowIn)));
 
     muchDelayedAnimation = Tween(begin: -1.0, end: 0.0).animate(CurvedAnimation(
         parent: animationController,
-        curve: Interval(0.3, 0.5, curve: Curves.fastOutSlowIn)));
+        curve: const Interval(0.3, 0.5, curve: Curves.fastOutSlowIn)));
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     animationController.dispose();
     super.dispose();
   }
@@ -59,7 +57,7 @@ class _ExamResultState extends State<ExamResult>
   getData() async {
     final spref = await SharedPreferences.getInstance();
     print(spref.getString('reg_no').toString());
-    var url = Constants.x + "view_assignments.php";
+    var url = "${Constants.x}view_assignments.php";
 
     http.Response response = await http.post(Uri.parse(url), body: {
       'department': spref.getString('department'),
@@ -72,7 +70,7 @@ class _ExamResultState extends State<ExamResult>
   Future<File> getImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    ImageFile = File(pickedFile.path);
+    ImageFile = File(pickedFile!.path);
     if (ImageFile != null) {
       final spref = await SharedPreferences.getInstance();
       ImageUpload.upload(
@@ -101,20 +99,20 @@ class _ExamResultState extends State<ExamResult>
     final double height = MediaQuery.of(context).size.height;
     return AnimatedBuilder(
         animation: animationController,
-        builder: (BuildContext context, Widget child) {
-          final GlobalKey<ScaffoldState> _scaffoldKey =
-              new GlobalKey<ScaffoldState>();
+        builder: (BuildContext context, Widget? child) {
+          final GlobalKey<ScaffoldState> scaffoldKey =
+              GlobalKey<ScaffoldState>();
           return Scaffold(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               appBar: CommonAppBar(
                 menuenabled: true,
                 notificationenabled: false,
                 title: "Classes",
                 ontap: () {
-                  _scaffoldKey.currentState.openDrawer();
+                  scaffoldKey.currentState!.openDrawer();
                 },
               ),
-              drawer: Drawer(
+              drawer: const Drawer(
                 elevation: 0,
                 child: MainDrawer(),
               ),
@@ -137,7 +135,7 @@ class _ExamResultState extends State<ExamResult>
                             Transform(
                               transform: Matrix4.translationValues(
                                   muchDelayedAnimation.value * width, 0, 0),
-                              child: Text(
+                              child: const Text(
                                 "Class Links",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -148,8 +146,8 @@ class _ExamResultState extends State<ExamResult>
                             Transform(
                               transform: Matrix4.translationValues(
                                   delayedAnimation.value * width, 0, 0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4.0),
                                 child: Text(
                                   "date : 15/12/2020",
                                   style: TextStyle(
@@ -197,17 +195,19 @@ class _ExamResultState extends State<ExamResult>
                             builder: (context, snap) {
                               if (snap.connectionState ==
                                   ConnectionState.waiting) {
-                                return Center(
+                                return const Center(
                                     child: CircularProgressIndicator());
-                              } else
+                              } else {
                                 print('data: ${snap.data}');
+                              }
                               // SizedBox(
                               //   height: 20.0,
                               // );
                               return InkWell(
-                                child: SubjectCard(
-                                  subjectname:
-                                      'Subject : ${snap.data[0]['subject']}(${snap.data[0]['name']})',
+                                child: const SubjectCard(
+                                  subjectname: 'Subject : name',
+                                  link: '',
+                                  mark: '',
                                 ),
                                 onTap: () {
                                   showDialog(
@@ -217,13 +217,15 @@ class _ExamResultState extends State<ExamResult>
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(snap.data[0]['details']),
+                                              const Text('details'),
                                               IconButton(
-                                                  onPressed: () {
-                                                    getImage();
-                                                  },
-                                                  icon:
-                                                      Icon(Icons.photo_camera)),
+                                                onPressed: () {
+                                                  getImage();
+                                                },
+                                                icon: const Icon(
+                                                  Icons.photo_camera,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         );
@@ -268,7 +270,7 @@ class _ExamResultState extends State<ExamResult>
                           //     // ),
                           //   ],
                           // ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Row(
