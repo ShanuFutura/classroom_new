@@ -8,14 +8,14 @@ class CustomDatePicker extends StatelessWidget {
   final Function validator;
   final String title;
 
-  const CustomDatePicker(
-      {Key key,
-      this.controller,
-      this.onchanged,
-      this.saved,
-      this.validator,
-      this.title})
-      : super(key: key);
+  const CustomDatePicker({
+    super.key,
+    required this.controller,
+    required this.onchanged,
+    required this.saved,
+    required this.validator,
+    required this.title,
+  });
   @override
   Widget build(BuildContext context) {
     return DateTimePicker(
@@ -25,13 +25,13 @@ class CustomDatePicker extends StatelessWidget {
       //initialValue: _initialValue,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
-      calendarTitle: "${title}",
+      calendarTitle: title,
       confirmText: "Confirm",
       enableSuggestions: true,
       //locale: Locale('en', 'US'),
-      onChanged: onchanged,
-      validator: validator,
-      onSaved: saved,
+      onChanged: onchanged(),
+      validator: validator(),
+      onSaved: saved(),
     );
   }
 }
