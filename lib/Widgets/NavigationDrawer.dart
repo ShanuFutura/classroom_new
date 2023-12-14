@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names, library_private_types_in_public_api
 
+import 'package:flutter/material.dart';
 import 'MainDrawer.dart';
 
 class NavigationDrawer extends StatefulWidget {
-  
-  NavigationDrawer({Key key, }) : super(key: key);
+  const NavigationDrawer({
+    super.key,
+  });
 
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
@@ -13,7 +15,7 @@ class NavigationDrawer extends StatefulWidget {
 class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return const Drawer(
       elevation: 0,
       child: MainDrawer(),
     );
