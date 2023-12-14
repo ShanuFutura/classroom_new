@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
+
 import 'dart:convert';
 // import 'dart:html';
 
@@ -8,7 +10,7 @@ import 'package:school_management/Screens/Exam/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Timetable extends StatefulWidget {
-  const Timetable({Key key}) : super(key: key);
+  const Timetable({super.key});
 
   @override
   State<Timetable> createState() => _TimetableState();
@@ -20,7 +22,7 @@ class _TimetableState extends State<Timetable> {
   getData() async {
     final spref = await SharedPreferences.getInstance();
     print(spref.getString('reg_no').toString());
-    var url =Constants.x+ "view_timetable.php";
+    var url = "${Constants.x}view_timetable.php";
 
     http.Response response = await http.post(Uri.parse(url), body: {
       'department': spref.getString('department'),
@@ -38,7 +40,7 @@ class _TimetableState extends State<Timetable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Timetable'),
+        title: const Text('Timetable'),
       ),
       body:
           //  ListView(
@@ -58,54 +60,40 @@ class _TimetableState extends State<Timetable> {
               builder: (context, snap) {
                 print('data: $data');
                 if (snap.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else
-                  SizedBox(
-                    height: 20.0,
-                  );
-                return Center(
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  const SizedBox(height: 20.0);
+                }
+                return const Center(
                   child: Card(
-                    child: Container(
+                    child: SizedBox(
                       height: 250,
                       width: 200,
                       child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Forenoon',
-                              style: TextStyle(
-                                fontSize: 25,
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Forenoon',
+                            style: TextStyle(
+                              fontSize: 25,
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text('Subject : ${snap.data[0]['forenoon_sub']}'),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                                'Teacher : ${snap.data[0]['forenoon_teacher']}  '),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Afternoon',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text('Subject : ${snap.data[0]['afternoon_sub']}'),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                                'Teacher : ${snap.data[0]['afternoon_teacher']}'),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ]),
+                          ),
+                          SizedBox(height: 20),
+                          Text('Subject : forenoon_sub'),
+                          SizedBox(height: 10),
+                          Text('Teacher : forenoon_teacher'),
+                          SizedBox(height: 10),
+                          Text(
+                            'Afternoon',
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          SizedBox(height: 20),
+                          Text('Subject : afternoon_sub'),
+                          SizedBox(height: 10),
+                          Text('Teacher : afternoon_teacher'),
+                          SizedBox(height: 10),
+                        ],
+                      ),
                     ),
                   ),
                 );
