@@ -1,28 +1,25 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 // import 'dart:html' as htm;
-
 import 'package:flutter/material.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:school_management/Screens/Exam/constant.dart';
 import 'package:school_management/Screens/image_view.dart';
-import 'package:school_management/Screens/pdf_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:pet_spotter/utils/constant.dart';
 
 class Materials extends StatelessWidget {
+  const Materials({super.key});
+
   // const DoctorsView({Key? key}) : super(key: key);
 
   Future<dynamic> getData() async {
-    final spref = await SharedPreferences.getInstance();
     final res = await http.post(
-      Uri.parse(Constants.x + 'view_material.php'),
+      Uri.parse('${Constants.x}view_material.php'),
     );
     print(res.body);
     return jsonDecode(res.body);
@@ -33,16 +30,18 @@ class Materials extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
-        title: Text('Online Classes'),
+        title: const Text('Online Classes'),
         backgroundColor: Colors.white,
       ),
       body: FutureBuilder(
           future: getData(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else if (snap.data == null) {
-              return Center(
+              return const Center(
                 child: Text('No data'),
               );
             } else {
@@ -84,11 +83,15 @@ class Materials extends StatelessWidget {
                           // launchUrl(Uri.parse(
                           //     'https://docs.google.com/gview?embedded=true&url=${(snap.data as dynamic)[index]['file_path']}'));
                         },
-                        leading: Icon(Icons.description),
-                        title: Text((snap.data as dynamic)[index]['heading']),
+                        leading: const Icon(Icons.description),
+                        title: Text(
+                          (snap.data as dynamic)[index]['heading'],
+                        ),
                         subtitle: Text(
                           (snap.data as dynamic)[index]['file'],
-                          style: TextStyle(color: Colors.blue),
+                          style: const TextStyle(
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                     );
