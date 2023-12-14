@@ -1,5 +1,6 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:school_management/Screens/Attendance/Attendance.dart';
 import 'package:school_management/Screens/Exam/Exam_Rseult.dart';
 import 'package:school_management/Screens/Exam/profile.dart';
 import 'package:school_management/Screens/Exam/timetable.dart';
@@ -10,11 +11,10 @@ import 'package:school_management/Screens/materials.dart';
 import 'package:school_management/Widgets/meetings.dart';
 import 'package:school_management/Widgets/DrawerListTile.dart';
 import 'package:school_management/Widgets/Exams/internal.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import 'Exams/teachers.dart';
 
 class MainDrawer extends StatefulWidget {
+  const MainDrawer({super.key});
+
   @override
   _MainDrawerState createState() => _MainDrawerState();
 }
@@ -24,7 +24,7 @@ class _MainDrawerState extends State<MainDrawer> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
         DrawerListTile(
             imgpath: "home.png",
             name: "Home",
@@ -32,7 +32,7 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Home(),
+                  builder: (BuildContext context) => const Home(),
                 ),
               );
             }),
@@ -57,7 +57,7 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Profile(),
+                  builder: (BuildContext context) => const Profile(),
                 ),
               );
             }),
@@ -81,7 +81,7 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Timetable(),
+                  builder: (BuildContext context) => const Timetable(),
                 ),
               );
             }),
@@ -90,10 +90,11 @@ class _MainDrawerState extends State<MainDrawer> {
             name: "Online Class",
             ontap: () async {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => Meetings(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const Meetings(),
+                ),
+              );
             }),
 
         DrawerListTile(
@@ -103,18 +104,18 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => ExamResult(),
+                  builder: (BuildContext context) => const ExamResult(),
                 ),
               );
             }),
-            DrawerListTile(
+        DrawerListTile(
             imgpath: "book.png",
             name: "Study Materials",
             ontap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => Materials(),
+                  builder: (BuildContext context) => const Materials(),
                 ),
               );
             }),
@@ -127,7 +128,7 @@ class _MainDrawerState extends State<MainDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (BuildContext context) => LeaveApply(),
+                builder: (BuildContext context) => const LeaveApply(),
               ),
             );
           },
@@ -139,7 +140,8 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => MyHomePage(),
+                  builder: (BuildContext context) =>
+                      const MyHomePage(title: ''),
                 ),
               );
             }),
