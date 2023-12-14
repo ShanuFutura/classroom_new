@@ -1,19 +1,20 @@
-import 'dart:convert';
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:school_management/Screens/Exam/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class Internal extends StatelessWidget {
-  Internal({Key key}) : super(key: key);
+  Internal({super.key});
 
   var data;
   var total_internal;
   getData() async {
     final spref = await SharedPreferences.getInstance();
     print(spref.getString('reg_no').toString());
-    var url = Constants.x + "avg.php";
+    var url = "${Constants.x}avg.php";
 
     http.Response response = await http.post(Uri.parse(url), body: {
       'reg_no': spref.getString('reg_no'),
@@ -21,7 +22,7 @@ class Internal extends StatelessWidget {
     final totalMark = jsonDecode(response.body)['total_internal'];
     // print('temp res=$tempRes');
     print('totalmark $totalMark');
-    http.post(Uri.parse(Constants.x + 'view_internal.php'), body: {
+    http.post(Uri.parse('${Constants.x}view_internal.php'), body: {
       'reg_no': spref.getString('reg_no'),
       'mark': totalMark.toString(),
     }).then((value) => print('sent back${value.body}'));
@@ -46,53 +47,66 @@ class Internal extends StatelessWidget {
           builder: (context, snap) {
             print('data: $data');
             if (snap.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else {
               return Center(
                 child: Card(
-                  child: Container(
+                  child: SizedBox(
                     height: double.infinity,
                     width: 550,
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Mark average: ${data['mark_average']}%',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Mark average: ${data['mark_average']}%',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
-                          SizedBox(height: 20),
-                          Text(
-                            'Attendace average: ${data['attandance_average']}%',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Attendace average: ${data['attandance_average']}%',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
-                          Text(
-                            'Assignment: ${data['assignment']}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text(
+                          'Assignment: ${data['assignment']}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'InternalMark',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'InternalMark',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${data['total_internal']}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${data['total_internal']}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
-                            ],
-                          )
-                        ]),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );
