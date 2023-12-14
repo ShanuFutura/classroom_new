@@ -1,32 +1,36 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:randomizer/randomizer.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 class SubjectCard extends StatelessWidget {
-  Randomizer randomcolor = Randomizer();
   final String subjectname;
   final String mark;
   final String link;
 
   // final String mark;
 
-  SubjectCard({Key key, this.subjectname, this.mark, this.link})
-      : super(key: key);
+  const SubjectCard({
+    super.key,
+    required this.subjectname,
+    required this.mark,
+    required this.link,
+  });
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              offset: Offset(0, 2),
-              spreadRadius: 1,
-            ),
-          ]),
+        borderRadius: BorderRadius.circular(7),
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black38,
+            offset: Offset(0, 2),
+            spreadRadius: 1,
+          ),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 10,
@@ -42,21 +46,18 @@ class SubjectCard extends StatelessWidget {
                   width: 5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: randomcolor.getrandomcolor(),
                   ),
                   height: height * 0.1,
                 ),
-                SizedBox(
-                  width: 20,
-                ),
+                const SizedBox(width: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
-                        "${subjectname}",
-                        style: TextStyle(
+                        subjectname,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -82,7 +83,7 @@ class SubjectCard extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Padding(
@@ -113,9 +114,7 @@ class SubjectCard extends StatelessWidget {
                     //     fontWeight: FontWeight.bold,
                     //   ),
                     // ),
-                    SizedBox(
-                      width: 5,
-                    ),
+                    SizedBox(width: 5),
                     // Text(
                     //   "Grade:${grade}",
                     //   style: TextStyle(
