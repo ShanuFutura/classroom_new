@@ -1,5 +1,5 @@
 // import 'dart:html';
-import 'dart:io';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
 // import 'package:heartbeat/constants/dummy_lists.dart';
@@ -8,7 +8,7 @@ import 'package:photo_view/photo_view.dart';
 // import 'package:provider/provider.dart';
 
 class ImageViewScreen extends StatelessWidget {
-  ImageViewScreen(String this.img);
+  ImageViewScreen(this.img, {super.key});
   String img;
   // final imageLoc;
   // ImageViewScreen(this.imageLoc);
@@ -19,15 +19,13 @@ class ImageViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: PhotoView(
-          minScale: PhotoViewComputedScale.contained,
-          // maxScale: PhotoViewComputedScale.contained,
-          basePosition: Alignment.center,
-          // enableRotation: true,
-          imageProvider: NetworkImage(
-            img.toString(),
-          ),
+      body: PhotoView(
+        minScale: PhotoViewComputedScale.contained,
+        // maxScale: PhotoViewComputedScale.contained,
+        basePosition: Alignment.center,
+        // enableRotation: true,
+        imageProvider: NetworkImage(
+          img.toString(),
         ),
       ),
     );
