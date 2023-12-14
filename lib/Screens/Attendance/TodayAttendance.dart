@@ -1,7 +1,11 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:school_management/Widgets/Attendance/AttendanceCard.dart';
 
 class TodayAttendance extends StatefulWidget {
+  const TodayAttendance({super.key});
+
   @override
   _TodayAttendanceState createState() => _TodayAttendanceState();
 }
@@ -9,7 +13,7 @@ class TodayAttendance extends StatefulWidget {
 class _TodayAttendanceState extends State<TodayAttendance> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
           AttendanceCard(
