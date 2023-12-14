@@ -1,33 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:pdf/pdf.dart' as pdf;
+// // ignore_for_file: implementation_imports, avoid_print
 
-class PDFViewPage extends StatefulWidget {
-  PDFViewPage({String this.path, Key key}) : super(key: key);
-  final String path;
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/framework.dart';
 
-  @override
-  State<PDFViewPage> createState() => _PDFViewPageState();
-}
+// class PDFViewPage extends StatefulWidget {
+//   const PDFViewPage({required this.path, super.key});
+//   final String path;
 
-class _PDFViewPageState extends State<PDFViewPage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WebView.platform = AndroidWebView();
-  }
+//   @override
+//   State<PDFViewPage> createState() => _PDFViewPageState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    print('the path ${widget.path}');
-    return WebView(
-      initialUrl:
-          'https://www.bgsu.edu/content/dam/BGSU/human-resources/documents/training/appraisals/fix-for-pdf-function-in-google-chrome.pdf',
-      javascriptMode: JavascriptMode.unrestricted,
-    );
-  }
-}
+// class _PDFViewPageState extends State<PDFViewPage> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     // WebView.platform = AndroidWebView();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     print('the path ${widget.path}');
+//     return WebView(
+//       initialUrl:
+//           'https://www.bgsu.edu/content/dam/BGSU/human-resources/documents/training/appraisals/fix-for-pdf-function-in-google-chrome.pdf',
+//       javascriptMode: JavascriptMode.unrestricted,
+//     );
+//   }
+// }
